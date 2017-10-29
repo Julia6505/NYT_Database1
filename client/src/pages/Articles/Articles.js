@@ -34,26 +34,26 @@ class Articles extends Component {
               <Input name="title" placeholder="Title (required)" />
               <Input name="author" placeholder="Author (required)" />
               <TextArea name="synopsis" placeholder="Synopsis (Optional)" />
-              <FormBtn>Submit Book</FormBtn>
+              <SearchBtn>Submit Book</SearchBtn>
             </form>
           </Col>
           <Col size="md-6">
             <Jumbotron>
               <h1>Books On My List</h1>
             </Jumbotron>
-            {this.state.books.length ? (
-              <List>
-                {this.state.books.map(book => (
-                  <ListItem key={book._id}>
-                    <a href={"/books/" + book._id}>
+            {this.state.articles.length ? (
+              <Results>
+                {this.state.articles.map(book => (
+                  <ResultsItem key={article._id}>
+                    <a href={"/books/" + article._id}>
                       <strong>
-                        {book.title} by {book.author}
+                        {article.title} by {article.author}
                       </strong>
                     </a>
-                    <DeleteBtn />
-                  </ListItem>
+                    {/* <SavedBtn /> */}
+                  </ResultsItem>
                 ))}
-              </List>
+              </Results>
             ) : (
               <h3>No Results to Display</h3>
             )}
@@ -64,4 +64,4 @@ class Articles extends Component {
   }
 }
 
-export default Books;
+export default Articles;
