@@ -5,20 +5,20 @@ import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { Results, ResultsItem, SavedBtn } from "../../components/Results";
 import { Saved, SavedItem, DeleteBtn } from "../../components/Saved";
-import { Input, TextArea, SearchBtn } from "../../components/Form";
+import { Input, SearchBtn } from "../../components/Form";
 
 class Articles extends Component {
   state = {
-    Articles: []
+    articles: []
   };
 
   componentDidMount() {
-    this.loadBooks();
+    this.callArticles();
   }
 
-  loadBooks = () => {
-    API.getBooks()
-      .then(res => this.setState({ books: res.data }))
+  callArticles = () => {
+    API.getArticles()
+      .then(res => this.setState({ articles: res.data }))
       .catch(err => console.log(err));
   };
 
@@ -26,37 +26,38 @@ class Articles extends Component {
     return (
       <Container fluid>
         <Row>
-          <Col size="md-6">
+          <Col size="md-12">
             <Jumbotron>
-              <h1>What Books Should I Read?</h1>
+              <h1>New York Times Article Search</h1>
             </Jumbotron>
             <form>
-              <Input name="title" placeholder="Title (required)" />
-              <Input name="author" placeholder="Author (required)" />
-              <TextArea name="synopsis" placeholder="Synopsis (Optional)" />
-              <SearchBtn>Submit Book</SearchBtn>
+              <Input name="topic" placeholder="Topic (required)" />
+              <Input name="startYear" placeholder="Start Year (required)" />
+              <Input name="endYear" placeholder="End Year (Optional)" />
+              <SearchBtn name="API.getArticles">Search</SearchBtn>
+           
             </form>
           </Col>
-          <Col size="md-6">
+          <Col size="md-12">
             <Jumbotron>
-              <h1>Books On My List</h1>
+              <h1>Searched Articles</h1>
             </Jumbotron>
-            {this.state.articles.length ? (
-              <Results>
-                {this.state.articles.map(book => (
-                  <ResultsItem key={article._id}>
-                    <a href={"/books/" + article._id}>
-                      <strong>
-                        {article.title} by {article.author}
-                      </strong>
-                    </a>
+            {/* {this.state.articles.length ? ( */}
+              {/* <Results> */}
+                {/* {this.state.articles.map(book => ( */}
+                  {/* <ResultsItem key={article._id}> */}
+                    {/* <a href={"/books/" + article._id}> */}
+                      {/* <strong> */}
+                        {/* {article.title} */}
+                      {/* </strong> */}
+                    {/* </a> */}
                     {/* <SavedBtn /> */}
-                  </ResultsItem>
-                ))}
-              </Results>
-            ) : (
-              <h3>No Results to Display</h3>
-            )}
+                  {/* </ResultsItem> */}
+                {/* ))} */}
+              {/* </Results> */}
+            {/* ) : ( */}
+              {/* <h3>No Results to Display</h3> */}
+            {/* )} */}
           </Col>
         </Row>
       </Container>
@@ -64,4 +65,5 @@ class Articles extends Component {
   }
 }
 
+//have to add saved
 export default Articles;
